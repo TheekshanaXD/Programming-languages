@@ -1,7 +1,7 @@
 #Create CSE machine to flatten the ST and simulate execution
 # -------------------NODES --------------------
 class Symbol:
-    def _init_(self, data):
+    def __init__(self, data):
         self.data = data
 
     def set_data(self, data):
@@ -11,37 +11,37 @@ class Symbol:
         return self.data
 
 class Rand(Symbol):
-    def _init_(self, data):
-        super()._init_(data)
+    def __init__(self, data):
+        super().__init__(data)
 
 class Rator(Symbol):
-    def _init_(self, data):
-        super()._init_(data)
+    def __init__(self, data):
+        super().__init__(data)
 
 class B(Symbol):
-    def _init_(self):
-        super()._init_("b")
+    def __init__(self):
+        super().__init__("b")
         self.symbols = []
 
 class Beta(Symbol):
-    def _init_(self):
-        super()._init_("beta")
+    def __init__(self):
+        super().__init__("beta")
 
 class Bool(Rand):
-    def _init_(self, data):
-        super()._init_(data)
+    def __init__(self, data):
+        super().__init__(data)
 
 class Bop(Rator):
-    def _init_(self, data):
-        super()._init_(data)
+    def __init__(self, data):
+        super().__init__(data)
 
 class Uop(Rator):
-    def _init_(self, data):
-        super()._init_(data)
+    def __init__(self, data):
+        super().__init__(data)
 
 class Delta(Symbol):
-    def _init_(self, i):
-        super()._init_("delta")
+    def __init__(self, i):
+        super().__init__("delta")
         self.index = i
         self.symbols = []
 
@@ -52,12 +52,12 @@ class Delta(Symbol):
         return self.index
 
 class Dummy(Rand):
-    def _init_(self):
-        super()._init_("dummy")
+    def __init__(self):
+        super().__init__("dummy")
 
 class E(Symbol):
-    def _init_(self, i):
-        super()._init_("e")
+    def __init__(self, i):
+        super().__init__("e")
         self.index = i
         self.parent = None
         self.is_removed = False
@@ -91,12 +91,12 @@ class E(Symbol):
             return Symbol(id.get_data())
 
 class Err(Symbol):
-    def _init_(self):
-        super()._init_("")
+    def __init__(self):
+        super().__init__("")
 
 class Eta(Symbol):
-    def _init_(self):
-        super()._init_("eta")
+    def __init__(self):
+        super().__init__("eta")
         self.index = None
         self.environment = None
         self.identifier = None
@@ -124,24 +124,24 @@ class Eta(Symbol):
         return self.lambda_
 
 class Gamma(Symbol):
-    def _init_(self):
-        super()._init_("gamma")
+    def __init__(self):
+        super().__init__("gamma")
 
 class Id(Rand):
-    def _init_(self, data):
-        super()._init_(data)
+    def __init__(self, data):
+        super().__init__(data)
 
 class Int(Rand):
-    def _init_(self, data):
-        super()._init_(data)
+    def __init__(self, data):
+        super().__init__(data)
 
 class Str(Rand):
-    def _init_(self, data):
-        super()._init_(data)
+    def __init__(self, data):
+        super().__init__(data)
 
 class Lambda(Symbol):
-    def _init_(self, i):
-        super()._init_("lambda")
+    def __init__(self, i):
+        super().__init__("lambda")
         self.index = i
         self.environment = None
         self.identifiers = []
@@ -163,25 +163,25 @@ class Lambda(Symbol):
         return self.index
 
 class Tau(Symbol):
-    def _init_(self, n):
-        super()._init_("tau")
+    def __init__(self, n):
+        super().__init__("tau")
         self.n = n
 
     def get_n(self):
         return self.n
 
 class Tup(Rand):
-    def _init_(self):
-        super()._init_("tuple")
+    def __init__(self):
+        super().__init__("tuple")
         self.symbols = []
 
 class Ystar(Symbol):
-    def _init_(self):
-        super()._init_("<Y*>")
+    def __init__(self):
+        super().__init__("<Y*>")
 
 # -------------------- CSEMachine --------------------
 class CSEMachine:
-    def _init_(self, control, stack, environment):
+    def __init__(self, control, stack, environment):
         self.control = control
         self.stack = stack
         self.environment = environment
@@ -323,7 +323,7 @@ class CSEMachine:
             return Int(str(int(val1) * int(val2)))
         elif op == "/":
             return Int(str(int(int(val1) / int(val2))))
-        elif op == "":
+        elif op == "**":
             return Int(str(int(val1) ** int(val2)))
         elif op == "&":
             return Bool(str((val1 == "true") and (val2 == "true")).lower())
@@ -363,7 +363,7 @@ class CSEMachine:
 
 # -------------------- CSEMachineFactory --------------------
 class CSEMachineFactory:
-    def _init_(self):
+    def __init__(self):
         self.e0 = E(0)
         self.i = 1
         self.j = 0
@@ -372,7 +372,7 @@ class CSEMachineFactory:
         data = node.get_data()
         if data in ("not", "neg"):
             return Uop(data)
-        elif data in ("+", "-", "", "/", "*", "&", "or", "eq", "ne", "ls", "le", "gr", "ge", "aug"):
+        elif data in ("+", "-", "**", "/", "*", "&", "or", "eq", "ne", "ls", "le", "gr", "ge", "aug"):
             return Bop(data)
         elif data == "gamma":
             return Gamma()
