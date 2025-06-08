@@ -24,7 +24,7 @@ OPERATOR_SYMBOLS = r'\+\-\*<>&\.@/:=~\|$!#%\^_\[\]\{\}"\'\?'
 TOKEN_REGEX = [
     ("COMMENT", r"//[^\n]*"),
     ("SPACE", r"[ \t\n]+"),
-    ("STRING", r"\'(\\[nt\\'\"]|[A-Za-z0-9 +\-*/<>&@/:=~|$!#%^_\[\]{}\"\'?,;()])*\'"),
+    ("STRING", r"\'(\\[nt\\'\"]|[^\\'])*\'"),
     ("INTEGER", r"\d+"),
     ("KEYWORD", r"\b(" + '|'.join(KEYWORDS) + r")\b"),
     ("IDENTIFIER", r"[A-Za-z][A-Za-z0-9_]*"),

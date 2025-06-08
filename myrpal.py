@@ -23,6 +23,9 @@ def main():
     try:
         # Tokenize and parse
         tokens = tokenize(source)
+        print("Tokens:")
+        for token in tokens:
+            print(token)
         parser = Parser(tokens)
         ast_nodes = parser.parse()
 
