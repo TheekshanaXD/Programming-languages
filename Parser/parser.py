@@ -3,6 +3,37 @@ from Parser.node import Node, NodeType
 
 
 class Parser:
+    """
+    A recursive descent parser for a functional programming language.
+    This parser implements a grammar for a functional language that supports:
+    - Let expressions with variable bindings
+    - Lambda functions (fn expressions)  
+    - Conditional expressions (->)
+    - Boolean operations (or, &, not)
+    - Arithmetic operations (+, -, *, /, **)
+    - Comparison operations (gr, ge, ls, le, eq, ne, >, >=, <, <=)
+    - Function application (gamma)
+    - Tuple construction (tau)
+    - Pattern matching and recursion (rec)
+    - Where clauses for local definitions
+    The parser takes a list of tokens as input and produces an Abstract Syntax Tree (AST)
+    represented as a list of Node objects. It follows a predictive parsing approach
+    where each grammar rule is implemented as a separate method.
+    Attributes:
+        tokens (list): List of Token objects to be parsed
+        ast (list): Stack-based representation of the AST being constructed
+        string_ast (list): String representation of the AST for display purposes
+    Methods:
+        parse(): Main parsing method that initiates parsing and returns the AST
+        convert_ast_to_string_ast(): Converts the internal AST to a readable string format
+        E(), Ew(), T(), Ta(), Tc(), B(), Bt(), Bs(), Bp(), A(), At(), Af(), Ap(), R(), Rn(): 
+            Grammar rule methods for expressions at different precedence levels
+        D(), Da(), Dr(), Db(): Grammar rule methods for declarations and definitions
+        Vb(), Vl(): Grammar rule methods for variable bindings and variable lists
+        _add_strings(): Helper method for string AST formatting
+    The parser uses a bottom-up approach to build the AST, where nodes are pushed onto
+    a stack and later combined based on their arity (number of children).
+    """
     def __init__(self, tokens):
         self.tokens = tokens
         self.ast = []

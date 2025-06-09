@@ -36,6 +36,37 @@ class NodeType(Enum):
 
 # Standardizer Node class (different from Parser Node)
 class StandardizerNode:
+    """
+    A node class for building and standardizing abstract syntax trees (AST) in a functional programming language.
+    This class represents a node in an AST that can be standardized according to specific transformation rules.
+    Each node contains data (operator/value), maintains parent-child relationships, tracks depth in the tree,
+    and can transform itself and its children according to standardization rules.
+    Attributes:
+        data: The data/value stored in this node (operator, identifier, literal, etc.)
+        depth (int): The depth of this node in the tree (root has depth 0)
+        parent (StandardizerNode): Reference to the parent node
+        children (list): List of child nodes
+        is_standardized (bool): Flag indicating if this node has been standardized
+    Methods:
+        set_data(data): Sets the data value for this node
+        get_data(): Returns the data value of this node
+        get_degree(): Returns the number of children (degree of the node)
+        get_children(): Returns the list of child nodes
+        set_depth(depth): Sets the depth of this node in the tree
+        get_depth(): Returns the depth of this node
+        set_parent(parent): Sets the parent node reference
+        get_parent(): Returns the parent node reference
+        standardize(): Recursively standardizes this node and its children according to transformation rules
+    Standardization Rules:
+        - 'let': Transforms let expressions into gamma-lambda form
+        - 'where': Converts where clauses to let expressions
+        - 'function_form': Transforms multi-parameter functions into nested lambdas
+        - 'lambda': Converts multi-parameter lambdas into nested single-parameter lambdas
+        - 'within': Transforms within expressions into nested gamma-lambda structures
+        - '@': Converts infix @ operator to gamma application
+        - 'and': Transforms simultaneous definitions into tuple form
+        - 'rec': Converts recursive definitions using Y combinator
+    """
     def __init__(self):
         self.data = None
         self.depth = 0
