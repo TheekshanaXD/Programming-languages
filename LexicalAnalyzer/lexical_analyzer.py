@@ -48,6 +48,24 @@ class Token:
 
 
 def tokenize(input_text):
+    """
+    Tokenizes input text into a list of tokens for lexical analysis.
+    This function processes the input text character by character, matching against
+    predefined compiled patterns to identify different types of tokens such as
+    keywords, identifiers, integers, strings, operators, and punctuation.
+    Args:
+        input_text (str): The source code text to be tokenized.
+    Returns:
+        list[Token]: A list of Token objects representing the lexical elements
+                    found in the input text. The list always ends with an EOF token.
+    Raises:
+        SyntaxError: If an unexpected character is encountered that doesn't match
+                    any of the defined token patterns.
+    Note:
+        - Whitespace and comments are skipped during tokenization
+        - The function relies on COMPILED_PATTERNS being defined in the module scope
+        - Each token contains a type (from TokenType enum) and the matched text
+    """
     tokens = []
     position = 0
     length = len(input_text)

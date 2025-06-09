@@ -181,6 +181,32 @@ class Ystar(Symbol):
 
 # -------------------- CSEMachine --------------------
 class CSEMachine:
+    """
+    CSE (Control-Stack-Environment) Machine implementation for functional programming language evaluation.
+    This class implements a virtual machine that evaluates functional programming constructs
+    using three main components: Control (instructions to execute), Stack (operand storage),
+    and Environment (variable bindings).
+    Attributes:
+        control (list): Stack of control structures and instructions to be executed
+        stack (list): Stack for storing intermediate values and operands
+        environment (list): List of environment frames for variable lookup and scoping
+    Methods:
+        execute(): Main execution loop that processes control structures and manages the machine state
+        apply_unary_operation(rator, rand): Applies unary operators (neg, not) to operands
+        apply_binary_operation(rator, rand1, rand2): Applies binary operators (+, -, *, /, etc.) to operands
+        get_tuple_value(tup): Recursively formats tuple values for output representation
+        get_answer(): Executes the program and returns the final result
+    Supported Operations:
+        - Lambda expressions and function application (Gamma)
+        - Conditional expressions (Beta)
+        - Tuple operations (Tau, tuple indexing)
+        - Built-in functions (Stem, Stern, Conc, Order, type checking functions)
+        - Arithmetic and logical operations
+        - Environment management and variable lookup
+        - Recursive functions via Y-combinator (Ystar, Eta)
+    The machine handles various symbol types including identifiers, literals, operators,
+    and control structures to evaluate functional programs step by step.
+    """
     def __init__(self, control, stack, environment):
         self.control = control
         self.stack = stack
