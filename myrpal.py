@@ -23,9 +23,6 @@ def main():
     try:
         # Tokenize and parse
         tokens = tokenize(source)
-        print("Tokens:")
-        for token in tokens:
-            print(token)
         parser = Parser(tokens)
         ast_nodes = parser.parse()
 
@@ -54,12 +51,13 @@ def main():
             
         # Standardize the AST
         standardizer_ast.standardize()
-        
+     
         # Show standardized AST if requested
         if show_st:
             print("Standardized AST:")
             standardizer_ast.print_ast()
-
+           
+       
         # Execute CSE Machine and print result
         if not show_ast and not show_st:
             # Only show result when not showing intermediate representations
@@ -78,7 +76,7 @@ def main():
                 cse_factory = CSEMachineFactory()
                 cse_machine = cse_factory.get_cse_machine(standardizer_ast)
                 result = cse_machine.get_answer()
-                # print("Result:", result)
+                
             except Exception as e:
                 print("Error during CSE machine execution:", e)
                 import traceback
@@ -88,6 +86,7 @@ def main():
         print("Error during parsing:", e)
         import traceback
         traceback.print_exc()
+        
 
 if __name__ == "__main__":
     main()

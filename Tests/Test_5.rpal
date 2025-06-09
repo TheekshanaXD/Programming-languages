@@ -11,4 +11,4 @@ in let rec pal_odd (x,n) = n eq 1 -> true |
 in let pal (x) = size x /2*2 ne size x -> pal_odd (x,  size x) | 
                                           pal_even (x, size x)
 in let IsPal(x) = print(pal x)
-in IsPal(14271)
+in IsPal(17271)

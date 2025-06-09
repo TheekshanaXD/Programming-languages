@@ -390,7 +390,9 @@ class CSEMachineFactory:
             return Tup()
         elif data.startswith("<TRUE_VALUE:t"):
             return Bool("true")
-        elif data.startswith("<TRUE_VALUE:f"):
+        # elif data.startswith("<TRUE_VALUE:f"):
+        #     return Bool("false")
+        elif data.startswith("<FALSE_VALUE:f"):
             return Bool("false")
         elif data.startswith("<dummy>"):
             return Dummy()

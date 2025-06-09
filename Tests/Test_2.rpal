@@ -1,0 +1,3 @@
+let rec Fact n = n eq 1 -> 1 | n * Fact (n-1)
+in let Factorial (x) = Print (Fact x)
+in Factorial (6)
